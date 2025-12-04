@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VotSL GDD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vigil-dark': '#0f172a',
+                        'vigil-card': '#1e293b',
+                        'vigil-gold': '#fbbf24',
+                        'vigil-text': '#94a3b8',
+                        'vigil-accent': '#38bdf8',
+                    },
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Lato', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        h1, h2, h3, .brand-font { font-family: 'Cinzel', serif; }
+        .mermaid { background-color: #1e293b; padding: 20px; border-radius: 8px; display: flex; justify-content: center; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-vigil-dark/95 border-b border-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-vigil-gold font-bold text-xl brand-font"><i class="fas fa-sword mr-2"></i>VotSL GDD</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#summary" class="hover:text-vigil-gold px-3 py-2 rounded-md text-sm font-medium transition">Summary</a>
+                        <a href="#narrative" class="hover:text-vigil-gold px-3 py-2 rounded-md text-sm font-medium transition">Narrative</a>
+                        <a href="#mechanics" class="hover:text-vigil-gold px-3 py-2 rounded-md text-sm font-medium transition">Mechanics</a>
+                        <a href="#progression" class="hover:text-vigil-gold px-3 py-2 rounded-md text-sm font-medium transition">Progression</a>
+                        <a href="#bosses" class="hover:text-vigil-gold px-3 py-2 rounded-md text-sm font-medium transition">Bosses</a>
+                    </div>
+                </div>
+                <div>
+                     <!-- IMPORTANT: Rename your PDF to 'Vigil_GDD.pdf' and place it in the same folder as this index.html file -->
+                     <a href="Vigil_GDD.pdf" download="Vigil_GDD.pdf" class="bg-vigil-gold text-vigil-dark hover:bg-yellow-400 px-4 py-2 rounded-md text-sm font-bold transition shadow-lg shadow-yellow-500/20">
+                        <i class="fas fa-file-pdf mr-2"></i>Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="summary" class="pt-32 pb-20 px-4 text-center bg-gradient-to-b from-vigil-dark to-vigil-card">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-wider">The Vigil of the <span class="text-vigil-gold">Second Light</span></h1>
+        <p class="text-xl text-vigil-text max-w-2xl mx-auto mb-8 italic">"Duty vs. Healing: A 2D Action-Platformer about protecting the light while fighting the dark within."</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">
+            <div class="bg-vigil-dark p-6 rounded-lg border border-gray-700 shadow-xl">
+                <i class="fas fa-shield-alt text-3xl text-vigil-accent mb-4"></i>
+                <h3 class="text-lg font-bold text-white mb-2">Trust Mechanic</h3>
+                <p class="text-sm text-gray-400">Asymmetric combat where the Hero protects the Child to maintain DPS. Failure causes Silence.</p>
+            </div>
+            <div class="bg-vigil-dark p-6 rounded-lg border border-gray-700 shadow-xl">
+                <i class="fas fa-heart-broken text-3xl text-red-400 mb-4"></i>
+                <h3 class="text-lg font-bold text-white mb-2">Hope-Gating</h3>
+                <p class="text-sm text-gray-400">Progression is tied to emotional healing. Defeating trauma (bosses) unlocks abilities.</p>
+            </div>
+            <div class="bg-vigil-dark p-6 rounded-lg border border-gray-700 shadow-xl">
+                <i class="fas fa-stopwatch text-3xl text-green-400 mb-4"></i>
+                <h3 class="text-lg font-bold text-white mb-2">Precision Defense</h3>
+                <p class="text-sm text-gray-400">High-stakes 0.15s parry windows reward rhythm and discipline over button mashing.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Narrative Section -->
+    <section id="narrative" class="py-20 px-4 max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-vigil-gold mb-8 border-b border-gray-700 pb-2"><i class="fas fa-book-open mr-3"></i>Narrative & Premise</h2>
+        <div class="bg-vigil-card rounded-xl p-8 shadow-lg border-l-4 border-vigil-gold">
+            <p class="text-lg text-gray-300 mb-6">
+                The story begins six months after a catastrophic attack. The <strong class="text-white">Hero</strong>, broken by the loss of their partner (The Elf), has fallen into a state of "Depression," losing their advanced combat abilities. They are now tasked with protecting a mysterious <strong class="text-white">Child</strong>, whose survival is key to the kingdom's future.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div>
+                    <h4 class="text-white font-bold mb-2">The Hero</h4>
+                    <p class="text-sm text-gray-400">A stoic protector. Mechanical "nerfs" at the start represent grief. Focuses on Defense/Melee.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-2">The Child</h4>
+                    <p class="text-sm text-gray-400">A young magic user representing the "Second Light." High damage but requires safety to cast.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mechanics Section -->
+    <section id="mechanics" class="py-20 px-4 bg-vigil-card">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-vigil-gold mb-12 border-b border-gray-700 pb-2"><i class="fas fa-cogs mr-3"></i>Core Mechanics</h2>
+            
+            <!-- Trust System -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-4">The Trust System (Combat)</h3>
+                    <p class="text-gray-300 mb-6">
+                        The core loop revolves around protecting the Child to maintain DPS. If the Hero misses a parry, the Child enters a <strong>Panic State</strong>.
+                    </p>
+                    <ul class="space-y-3 text-gray-400 mb-6">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Hero:</strong> Tank / Parry / Positioning</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Child:</strong> Glass Cannon / Elemental Magic</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i> <strong>Failure:</strong> 5-second Silence (0 DPS)</li>
+                    </ul>
+                    <div class="bg-vigil-dark p-4 rounded border border-gray-700">
+                        <h4 class="text-vigil-accent font-bold text-sm uppercase mb-2">Technical Specs</h4>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Parry Window:</span>
+                            <span class="text-white font-mono">0.15s (9 frames @ 60fps)</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Success Reward:</span>
+                            <span class="text-white font-mono">+5 MP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mermaid">
+graph TD
+    A[Enemy Initiates Attack] --> B{Player Input?}
+    B -- No Input --> C[Hero Takes Damage]
+    B -- Input: Block Button --> D{Check Timing Window}
+    
+    D -- Window > 0.15s --> E[Late Block / Fail]
+    D -- Window <= 0.15s --> F[Perfect Parry Success!]
+    
+    E --> G[Hero Takes Reduced Damage]
+    E --> H[Child Panic State]
+    H --> I[SILENCE: Magic Disabled for 5s]
+    
+    F --> K[Damage Negated]
+    F --> L[Gain +5 MP]
+    F --> M[Child Casts Elemental Magic]
+    style A fill:#0f172a,stroke:#fbbf24,stroke-width:2px,color:#fff
+    style F fill:#064e3b,stroke:#34d399,color:#fff
+    style I fill:#7f1d1d,stroke:#f87171,color:#fff
+                </div>
+            </div>
+
+            <!-- Umbra Pact -->
+            <div class="grid lg:grid-cols-2 gap-12 pt-12 border-t border-gray-700">
+                <div class="order-2 lg:order-1 mermaid">
+graph TD
+    A[Activate Umbra Pact] --> B{Available?}
+    B -- Ready --> C[LOCK HP: Set to 50%]
+    
+    C --> E[Start 30s Timer]
+    E --> F[Apply Buffs]
+    
+    F --> G[Buff 1: 2x Damage]
+    F --> H[Buff 2: +10 MP/sec]
+    
+    E --> I{Timer > 0?}
+    I -- Yes --> F
+    I -- No --> J[End Pact & Remove Buffs]
+    style C fill:#7f1d1d,stroke:#f87171,color:#fff
+    style F fill:#064e3b,stroke:#34d399,color:#fff
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h3 class="text-2xl font-bold text-white mb-4">The Umbra Pact (Risk/Reward)</h3>
+                    <p class="text-gray-300 mb-6">
+                        Unlocked at Act I Climax. A toggle ability that trades safety for extreme power.
+                    </p>
+                    <div class="bg-vigil-dark p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="text-red-400 font-bold mb-2">The Sacrifice</h4>
+                        <p class="text-sm text-gray-400 mb-4">Instantly reduces HP to 50% (Hard cap at 100 HP).</p>
+                        
+                        <h4 class="text-green-400 font-bold mb-2">The Reward</h4>
+                        <p class="text-sm text-gray-400">+10 MP/sec Regen AND 2x Melee Damage for 30s.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progression Section -->
+    <section id="progression" class="py-20 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-vigil-gold mb-8 border-b border-gray-700 pb-2"><i class="fas fa-dungeon mr-3"></i>Progression: "Hope-Gating"</h2>
+        <p class="text-gray-400 mb-8 max-w-3xl">Progression is strictly tied to the narrative. The Hero begins in a state of depression (mechanically limited) and regains abilities by overcoming trauma (Bosses).</p>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-vigil-card text-vigil-gold border-b border-gray-600">
+                        <th class="p-4 font-bold">Hub</th>
+                        <th class="p-4 font-bold">Boss / Location</th>
+                        <th class="p-4 font-bold">Ability Unlocked</th>
+                        <th class="p-4 font-bold">Narrative Flashback</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300 text-sm">
+                    <tr class="border-b border-gray-800 hover:bg-vigil-card transition">
+                        <td class="p-4 text-vigil-accent">H1</td>
+                        <td class="p-4">The Royal Scavenger</td>
+                        <td class="p-4"><span class="bg-blue-900 text-blue-200 px-2 py-1 rounded text-xs">Double Jump</span></td>
+                        <td class="p-4 italic text-gray-400">"We all carry a piece of the distance."</td>
+                    </tr>
+                    <tr class="border-b border-gray-800 hover:bg-vigil-card transition">
+                        <td class="p-4 text-vigil-accent">H2</td>
+                        <td class="p-4">Glimmering Abyss</td>
+                        <td class="p-4"><span class="bg-blue-900 text-blue-200 px-2 py-1 rounded text-xs">Glide</span></td>
+                        <td class="p-4 italic text-gray-400">"Do not mistake a path for a barrier."</td>
+                    </tr>
+                    <tr class="border-b border-gray-800 hover:bg-vigil-card transition">
+                        <td class="p-4 text-vigil-accent">H3</td>
+                        <td class="p-4 font-bold text-red-400">The Priest (Act I Boss)</td>
+                        <td class="p-4"><span class="bg-red-900 text-red-200 px-2 py-1 rounded text-xs">Umbra Pact</span></td>
+                        <td class="p-4 italic text-gray-400">The Betrayal revealed. Hero enters Rage Mode.</td>
+                    </tr>
+                    <tr class="border-b border-gray-800 hover:bg-vigil-card transition">
+                        <td class="p-4 text-vigil-accent">H5</td>
+                        <td class="p-4">Lord Vesper</td>
+                        <td class="p-4"><span class="bg-green-900 text-green-200 px-2 py-1 rounded text-xs">Poison Magic (Child)</span></td>
+                        <td class="p-4 italic text-gray-400">"Control over dark expression is pragmatic."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Technical Section -->
+    <section id="technical" class="py-20 px-4 bg-vigil-card">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-8"><i class="fas fa-code mr-3"></i>Technical Implementation (Unity)</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+                <div class="bg-vigil-dark p-6 rounded border border-gray-700">
+                    <h4 class="text-vigil-gold font-bold mb-2">Input System</h4>
+                    <p class="text-sm text-gray-400">Utilizing Unity's new Input System to ensure frame-perfect detection for the 0.15s parry window.</p>
+                </div>
+                <div class="bg-vigil-dark p-6 rounded border border-gray-700">
+                    <h4 class="text-vigil-gold font-bold mb-2">Child AI (FSM)</h4>
+                    <p class="text-sm text-gray-400">Implementing a Finite State Machine: <code>Idle</code>, <code>Casting</code>, <code>Follow</code>, and <code>Panic</code> (triggered by PlayerHit event).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-vigil-dark py-12 border-t border-gray-800 text-center">
+        <p class="text-vigil-gold font-cinzel text-2xl mb-4">Yash Tandon</p>
+        <p class="text-gray-500 mb-6">Game Producer | Technical Designer | Esports Operations</p>
+        <div class="flex justify-center space-x-6 mb-8">
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin text-2xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-envelope text-2xl"></i></a>
+        </div>
+        <p class="text-gray-600 text-sm">&copy; 2025 Vigil of the Second Light GDD. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Mermaid JS Loader -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e293b',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#fbbf24',
+                lineColor: '#94a3b8',
+                secondaryColor: '#0f172a',
+                tertiaryColor: '#1e293b'
+            }
+        });
+    </script>
+</body>
+</html>
