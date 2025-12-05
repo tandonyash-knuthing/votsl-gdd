@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VotSL GDD | High-Fantasy Action RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fantasy-bg': '#0f0518', /* Deepest Purple/Black */
+                        'fantasy-card': '#1a0b2e', /* Deep Indigo */
+                        'fantasy-gold': '#ffd700', /* Bright Second Light Gold */
+                        'fantasy-accent': '#c084fc', /* Magical Purple */
+                        'fantasy-text': '#e2e8f0',
+                        'fantasy-muted': '#94a3b8',
+                        'parchment': '#fef3c7',
+                        'delusion': '#ef4444', /* Red for the Bad Path */
+                    },
+                    fontFamily: {
+                        'rune': ['Cinzel', 'serif'],
+                        'scroll': ['Cormorant Garamond', 'serif'],
+                    },
+                    boxShadow: {
+                        'magical': '0 0 20px rgba(192, 132, 252, 0.2)',
+                        'gold-glow': '0 0 15px rgba(255, 215, 0, 0.25)',
+                        'red-glow': '0 0 15px rgba(239, 68, 68, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cormorant Garamond', serif; background-color: #0f0518; color: #e2e8f0; background-image: radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0518 70%); }
+        h1, h2, h3, .brand-font { font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
+        .mermaid { background-color: #1a0b2e; padding: 25px; border: 1px solid #4c1d95; border-radius: 4px; display: flex; justify-content: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+        
+        /* Magical Divider */
+        .divider-rune {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 4rem 0;
+            color: #ffd700;
+            opacity: 0.6;
+        }
+        .divider-rune::before, .divider-rune::after {
+            content: "";
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            width: 30%;
+            margin: 0 1rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0f0518; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border: 1px solid #1a0b2e; }
+        ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
+    </style>
+</head>
+<body class="antialiased text-lg">
+
+    <!-- Development Warning Banner -->
+    <div class="fixed top-0 left-0 w-full bg-yellow-900/90 border-b border-yellow-600 z-[60] py-2 text-center backdrop-blur-md shadow-lg">
+        <p class="text-yellow-200 font-rune text-xs uppercase tracking-widest">
+            <i class="fas fa-hammer mr-2 animate-pulse"></i> 
+            Work In Progress: Full Game Development & Act 3 Design are currently in process
+        </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-8 bg-fantasy-bg/85 border-b border-white/10 backdrop-blur-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <span class="text-fantasy-gold font-bold text-2xl brand-font drop-shadow-md">
+                        <i class="fas fa-sun mr-2 animate-pulse"></i>VotSL
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#summary" class="text-fantasy-text hover:text-fantasy-gold px-3 py-2 rounded-md font-bold transition hover:shadow-gold-glow">Grimoire</a>
+                        <a href="#act1" class="text-fantasy-text hover:text-blue-300 px-3 py-2 rounded-md font-bold transition hover:shadow-gold-glow">Act I: The Vigil</a>
+                        <a href="#act2" class="text-fantasy-text hover:text-fantasy-gold px-3 py-2 rounded-md font-bold transition hover:shadow-gold-glow">Act II: Stewardship</a>
+                        <a href="#act3" class="text-fantasy-text hover:text-delusion px-3 py-2 rounded-md font-bold transition hover:shadow-gold-glow">Act III: The Descent</a>
+                    </div>
+                </div>
+                <div>
+                     <a href="VotSL_GDD.pdf" download="VotSL_GDD.pdf" class="bg-gradient-to-r from-yellow-700 to-yellow-600 text-white border border-yellow-400 hover:from-yellow-600 hover:to-yellow-500 px-6 py-2 rounded-sm text-sm font-rune font-bold transition shadow-gold-glow transform hover:-translate-y-0.5">
+                        <i class="fas fa-scroll mr-2"></i>Download GDD
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="summary" class="pt-48 pb-24 px-4 text-center relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-fantasy-gold/5 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="inline-block border border-fantasy-accent/30 rounded-full px-4 py-1 mb-6 bg-fantasy-accent/10">
+            <span class="text-fantasy-accent font-rune text-sm tracking-widest">Version 3.7 // Design Document</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-fantasy-gold to-yellow-800 mb-6 drop-shadow-sm leading-tight">
+            The Vigil of the <br/><span class="text-white drop-shadow-[0_0_25px_rgba(255,215,0,0.6)]">Second Light</span>
+        </h1>
+        <p class="text-2xl text-fantasy-muted max-w-3xl mx-auto mb-16 italic font-scroll text-parchment/80">
+            "A High-Precision 2D Action-RPG where a father must become the shield, so his daughter can become the storm."
+        </p>
+    </header>
+
+    <!-- ACT I SECTION -->
+    <section id="act1" class="py-20 px-4 bg-fantasy-card/50 border-t border-blue-900/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-blue-300 font-rune text-sm tracking-[0.5em] uppercase">Part One</span>
+                <h2 class="text-5xl font-bold text-white mt-2 mb-6 font-rune">The Journey to Betrayal</h2>
+                <p class="text-fantasy-muted max-w-2xl mx-auto italic">"He fights alone, haunted by the memory of failure."</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Narrative Col -->
+                <div class="space-y-8">
+                    <div class="bg-fantasy-bg p-8 rounded-sm border border-blue-900/30 shadow-lg">
+                        <h3 class="text-2xl font-rune text-blue-300 mb-4"><i class="fas fa-book-open mr-2"></i>Narrative Context</h3>
+                        <div class="space-y-4 text-fantasy-text leading-relaxed">
+                            <p>
+                                <strong>The Prelude:</strong> After a grueling 20-year crusade, the Hero's party (Hero, Elf, Dwarf, and Priest) finally vanquished the Demon King. They returned as legends, celebrating a month of hard-won peace in the village.
+                            </p>
+                            <p>
+                                <strong>The Betrayal:</strong> However, the Demon was not truly gone; his essence corrupted the King, amplifying a secret jealousy of the Elves' long lives. In a brutal surprise attack, the King's army and the Church razed the village. The Dwarf was slaughtered. The Elf was kidnapped to be harvested for an elixir of immortality. The Hero and Priest were left broken and half-dead.
+                            </p>
+                            <p>
+                                <strong>The Depression (6 Months):</strong> Believing his entire party slain (after finding the Dwarf's body), the Hero fell into a deep, paralyzing depression. For six months, he mourned, his skills atrophying. He is only roused when the scarred Priest finds him with a revelation: <em>"She is alive."</em>
+                            </p>
+                            <p>
+                                <strong>Climax (H3):</strong> The Hero sets out, regaining his strength. He confronts The Priest (Act I Boss), only to learn the crushing truth: The Elf <em>did</em> die in captivity. In the ruins of the fight, he finds the <strong>Child imprisoned</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Hubs Table -->
+                    <div class="overflow-hidden rounded-sm border border-blue-900/30">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-blue-900/20 text-blue-200">
+                                <tr><th class="p-3">Hub</th><th class="p-3">Boss</th><th class="p-3">Unlock</th></tr>
+                            </thead>
+                            <tbody class="text-fantasy-muted">
+                                <tr class="border-b border-white/5"><td class="p-3">H1</td><td class="p-3">Royal Scavenger</td><td class="p-3 text-blue-300">Double Jump</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-3">H2</td><td class="p-3">Glimmering Abyss</td><td class="p-3 text-blue-300">Glide</td></tr>
+                                <tr><td class="p-3">H3</td><td class="p-3 text-delusion">The Priest</td><td class="p-3 text-delusion">Umbra Pact</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Mechanics Col -->
+                <div class="space-y-8">
+                    <div class="bg-fantasy-bg p-8 rounded-sm border border-blue-900/30 shadow-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl"></div>
+                        <h3 class="text-2xl font-rune text-white mb-6"><i class="fas fa-cogs mr-2"></i>Hero's Core Mechanics</h3>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start">
+                                <div class="bg-blue-900/30 p-2 rounded mr-4"><i class="fas fa-shield-alt text-blue-300"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white">Block & Parry</h4>
+                                    <p class="text-sm text-fantasy-muted">Hold to Block (reduces damage). Tap just before impact (0.15s window) to <strong>Parry</strong>, negating damage and restoring 5 MP.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-900/30 p-2 rounded mr-4"><i class="fas fa-running text-blue-300"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white">Dodge</h4>
+                                    <p class="text-sm text-fantasy-muted">Standard evasion roll with i-frames. Essential for positioning.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-900/30 p-2 rounded mr-4"><i class="fas fa-ghost text-blue-300"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white">Perfect Dodge (Teleport)</h4>
+                                    <p class="text-sm text-fantasy-muted">Unlocked later. A frame-perfect dodge (0.075s window) that instantly teleports the Hero a short distance. Cost: 0 MP.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Umbra Pact Card -->
+                        <div class="bg-black/40 p-6 rounded border-l-4 border-delusion mb-6">
+                            <h4 class="text-lg font-bold text-delusion mb-2">The Umbra Pact (Rage Mode)</h4>
+                            <p class="text-sm text-fantasy-muted mb-3">Unlocked at H3 Climax. A risk/reward toggle representing the Hero's grief.</p>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div class="text-red-300"><i class="fas fa-tint mr-1"></i> HP Locked to 50%</div>
+                                <div class="text-green-300"><i class="fas fa-bolt mr-1"></i> 2x Damage + Regen</div>
+                            </div>
+                        </div>
+
+                        <!-- Mermaid Logic -->
+                        <div class="mermaid">
+graph TD
+    A[Activate Pact] --> B{Check HP > 50?}
+    B -- Yes --> C[Set HP = 50%]
+    C --> D[Start 30s Timer]
+    D --> E[Apply Buffs: 2x Dmg]
+    style C fill:#7f1d1d,stroke:#f87171,color:#fff
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACT II SECTION -->
+    <section id="act2" class="py-20 px-4 bg-fantasy-bg border-t border-fantasy-gold/30 relative">
+        <div class="absolute inset-0 bg-fantasy-gold/5 pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-fantasy-gold font-rune text-sm tracking-[0.5em] uppercase">Part Two</span>
+                <h2 class="text-5xl font-bold text-white mt-2 mb-6 font-rune">The Stewardship</h2>
+                <p class="text-fantasy-muted max-w-2xl mx-auto italic">"He becomes the Shield, so she can become the Storm."</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Mechanics Col (Left for Act 2) -->
+                <div class="space-y-8 order-2 lg:order-1">
+                    <div class="bg-fantasy-card p-8 rounded-sm border border-fantasy-gold/30 shadow-gold-glow">
+                        <h3 class="text-2xl font-rune text-fantasy-gold mb-6"><i class="fas fa-users mr-2"></i>The Trust System</h3>
+                        
+                        <p class="text-fantasy-text mb-4">Combat becomes asymmetric. The Hero must defend to enable the Daughter's DPS.</p>
+
+                        <div class="space-y-4">
+                            <!-- Trust Mechanic -->
+                            <div class="bg-black/40 p-4 rounded border-l-4 border-fantasy-gold">
+                                <h4 class="font-bold text-fantasy-gold">Duo Synergy</h4>
+                                <ul class="text-sm space-y-1 mt-2 text-fantasy-muted">
+                                    <li><i class="fas fa-shield-alt text-fantasy-gold w-5"></i> <strong>Hero:</strong> Tanks & Parries (0.15s window).</li>
+                                    <li><i class="fas fa-magic text-fantasy-accent w-5"></i> <strong>Daughter:</strong> Auto-Casts Magic if Hero is safe.</li>
+                                    <li><i class="fas fa-exclamation-triangle text-delusion w-5"></i> <strong>Panic:</strong> Hero Hit = 5s Silence (0 DPS).</li>
+                                </ul>
+                            </div>
+
+                            <!-- Elemental Imbue -->
+                            <div class="bg-black/40 p-4 rounded border-l-4 border-fantasy-accent">
+                                <h4 class="font-bold text-fantasy-accent">Elemental Imbue (New)</h4>
+                                <p class="text-sm text-fantasy-muted mt-1">Unlocked at H8. Hero spends <strong>50 MP</strong> to coat his sword with the Daughter's current element (Fire/Ice/Poison) for 30s.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="mermaid shadow-magical">
+graph TD
+    A[Enemy Attack] --> B{Hero Reaction?}
+    B -- Block Input --> D{Timing Check}
+    D -- <= 0.15s (Perfect) --> F[Perfect Parry!]
+    E[Late Block] --> H[Daughter PANIC]
+    H --> I[SILENCE: 5s No Magic]
+    F --> M[Daughter Casts Spell]
+    style F fill:#064e3b,stroke:#34d399,color:#fff
+    style I fill:#7f1d1d,stroke:#f87171,color:#fff
+                        </div>
+                </div>
+
+                <!-- Narrative Col -->
+                <div class="space-y-8 order-1 lg:order-2">
+                    <div class="bg-fantasy-card p-8 rounded-sm border border-fantasy-gold/30 shadow-lg">
+                        <h3 class="text-2xl font-rune text-fantasy-gold mb-4"><i class="fas fa-scroll mr-2"></i>Narrative Context</h3>
+                        <p class="text-fantasy-text mb-4 leading-relaxed">
+                            <strong>Act 2 Beginnings:</strong> The Hero initially tries to train the rescued Child using his memories of the Elf's magic, but it isn't enough. Desperate for answers, they return to the Priest's lair.
+                        </p>
+                        <p class="text-fantasy-text mb-4 leading-relaxed">
+                            <strong>The Identity Reveal:</strong> There, amidst the wreckage, the Hero finds the <strong>King's Letter</strong>. It confirms the Child is the escaped daughter of the Elf and himself. Armed with this truth and his new duty, the true Stewardship begins.
+                        </p>
+                        
+                        <!-- Hubs Table -->
+                        <div class="overflow-hidden rounded-sm border border-fantasy-gold/30 mt-6">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-fantasy-gold/10 text-fantasy-gold">
+                                    <tr><th class="p-3">Hub</th><th class="p-3">Boss</th><th class="p-3">Child Unlock</th></tr>
+                                </thead>
+                                <tbody class="text-fantasy-muted">
+                                    <tr class="border-b border-white/5"><td class="p-3">H4</td><td class="p-3">Fading Sanctuary</td><td class="p-3 text-fantasy-accent">Child Joins</td></tr>
+                                    <tr class="border-b border-white/5"><td class="p-3">H5</td><td class="p-3">Lord Vesper</td><td class="p-3 text-green-400">Poison Magic</td></tr>
+                                    <tr class="border-b border-white/5"><td class="p-3">H6</td><td class="p-3">Ashforged Sentinel</td><td class="p-3 text-orange-400">Fire Magic</td></tr>
+                                    <tr class="border-b border-white/5"><td class="p-3">H7</td><td class="p-3">Frozen Herald</td><td class="p-3 text-cyan-300">Ice Magic</td></tr>
+                                    <tr class="border-b border-white/5"><td class="p-3">H8</td><td class="p-3 text-purple-400">Scion of Decay</td><td class="p-3 text-purple-400">Elemental Imbue</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACT III SECTION -->
+    <section id="act3" class="py-20 px-4 bg-fantasy-card border-t border-delusion/30 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-delusion font-rune text-sm tracking-[0.5em] uppercase">Part Three</span>
+                <h2 class="text-5xl font-bold text-white mt-2 mb-6 font-rune">The Descent & The Choice</h2>
+                <p class="text-fantasy-muted max-w-2xl mx-auto italic">"The King kidnaps the Daughter. The Hero finds the Soul-Forged Blade. Fate splits."</p>
+            </div>
+
+            <!-- The Fork -->
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <!-- Path A -->
+                <div class="bg-fantasy-bg p-8 rounded-sm border border-blue-500/50 hover:border-blue-400 transition group">
+                    <h3 class="text-2xl font-rune text-blue-400 mb-2">Path A: The Good Path</h3>
+                    <p class="text-blue-200/50 text-sm uppercase tracking-widest mb-6">Reject the Blade (Hard Mode)</p>
+                    <ul class="text-sm text-blue-200/80 list-disc list-inside space-y-3">
+                        <li><strong>Narrative:</strong> Hero accepts the Elf's death and refuses the delusion.</li>
+                        <li><strong>Gameplay:</strong> SOLO Combat. No Magic. Requires pure skill/parrying.</li>
+                        <li><strong>Goal:</strong> Rescue the Daughter to regain magic for the final boss.</li>
+                    </ul>
+                </div>
+
+                <!-- Path B -->
+                <div class="bg-fantasy-bg p-8 rounded-sm border border-delusion/50 hover:border-delusion transition group">
+                    <h3 class="text-2xl font-rune text-delusion mb-2">Path B: The Bad Path</h3>
+                    <p class="text-red-200/50 text-sm uppercase tracking-widest mb-6">Accept the Blade (Power Fantasy)</p>
+                    <ul class="text-sm text-red-200/80 list-disc list-inside space-y-3">
+                        <li><strong>Narrative:</strong> Hero believes the Elf is alive in the sword. Madness takes over.</li>
+                        <li><strong>Gameplay:</strong> <span class="text-white">Soul-Forged Blade Mechanic</span>. Rapid-fire Ranged Corruption attacks. No cooldowns.</li>
+                        <li><strong>Goal:</strong> Slaughter the King at any cost.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Endings Cards -->
+            <h3 class="text-3xl font-rune text-white text-center mb-8">The Three Endings</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-black/40 border border-fantasy-gold/30 p-6 text-center">
+                    <div class="text-fantasy-gold text-4xl mb-3"><i class="fas fa-sun"></i></div>
+                    <h4 class="font-bold text-white">Good Ending</h4>
+                    <p class="text-xs text-fantasy-muted uppercase mb-2">Vigil of the Second Light</p>
+                    <p class="text-sm text-gray-400">Path A. Daughter is rescued. They defeat the King together. Peace restored.</p>
+                </div>
+                <div class="bg-black/40 border border-white/20 p-6 text-center">
+                    <div class="text-gray-400 text-4xl mb-3"><i class="fas fa-moon"></i></div>
+                    <h4 class="font-bold text-white">Normal Ending</h4>
+                    <p class="text-xs text-fantasy-muted uppercase mb-2">The Cycle Ends</p>
+                    <p class="text-sm text-gray-400">Path A. Hero dies protecting her. Daughter wields his blade to finish the fight.</p>
+                </div>
+                <div class="bg-black/40 border border-delusion/30 p-6 text-center">
+                    <div class="text-delusion text-4xl mb-3"><i class="fas fa-skull"></i></div>
+                    <h4 class="font-bold text-delusion">Bad Ending</h4>
+                    <p class="text-xs text-fantasy-muted uppercase mb-2">Illusion of Solace</p>
+                    <p class="text-sm text-gray-400">Path B. Hero slaughters King. Daughter abandons him. He rules alone in madness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-fantasy-bg py-16 border-t border-white/5 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-fantasy-gold to-transparent opacity-50"></div>
+        <p class="text-fantasy-gold font-rune text-3xl mb-4">Yash Tandon</p>
+        <p class="text-fantasy-muted mb-8 font-scroll tracking-widest text-sm">GAME PRODUCER | TECHNICAL DESIGNER | ESPORTS OPERATIONS</p>
+        <div class="flex justify-center space-x-8 mb-10">
+            <a href="#" class="text-fantasy-muted hover:text-white transition transform hover:scale-110"><i class="fab fa-linkedin text-3xl"></i></a>
+            <a href="#" class="text-fantasy-muted hover:text-white transition transform hover:scale-110"><i class="fas fa-envelope text-3xl"></i></a>
+        </div>
+        <p class="text-white/20 text-xs font-mono">&copy; 2025 VotSL. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Mermaid JS Loader -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#1a0b2e',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#c084fc',
+                lineColor: '#ffd700',
+                secondaryColor: '#0f0518',
+                tertiaryColor: '#1e293b'
+            }
+        });
+    </script>
+</body>
+</html>
